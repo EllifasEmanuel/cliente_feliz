@@ -96,8 +96,10 @@
                 </table> 
             </div>
 
-            <div>
-                <button>Baixar arquivos</button>
+            <div> 
+                <a href="{{URL::to('export')}}" target="_blank" rel="noopener noreferrer">
+                    <button class="btn-primary">Baixar PDF</button>
+                </a>
             </div>
 
             <div>
@@ -252,13 +254,14 @@
             else
                 area_user_senha_confirmacao.classList.remove('conteudo-obrigatorio');
             return false;
-        }else{
-            area_user_name.classList.remove('conteudo-obrigatorio');
-            area_user_email.classList.remove('conteudo-obrigatorio');
-            area_user_senha.classList.remove('conteudo-obrigatorio');
-            area_user_senha_confirmacao.classList.remove('conteudo-obrigatorio');
-            return true;
         }
+
+        area_user_name.classList.remove('conteudo-obrigatorio');
+        area_user_email.classList.remove('conteudo-obrigatorio');
+        area_user_senha.classList.remove('conteudo-obrigatorio');
+        area_user_senha_confirmacao.classList.remove('conteudo-obrigatorio');
+        return true;
+        
     }
 
     const removerUsuario = (el) =>{

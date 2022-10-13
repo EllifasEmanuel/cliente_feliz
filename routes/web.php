@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportPDFController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\UsuariosController;
@@ -29,5 +30,7 @@ Route::get('/usuarios',[UsuariosController::class, 'index'])->middleware('verifi
 Route::get('/show',[UsuariosController::class, 'show'])->middleware('verified');
 Route::get('/update',[UsuariosController::class, 'update'])->middleware('verified');
 Route::get('/remove',[UsuariosController::class, 'remove'])->middleware('verified');
+
+Route::get('/export',[ExportPDFController::class, 'generatePDF'])->middleware('verified');
 
 Route::get('/logout',[LoginController::class, 'destroy'])->name('logout');
