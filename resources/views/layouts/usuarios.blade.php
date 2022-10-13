@@ -34,7 +34,7 @@
         cursor: pointer;
     }
 
-    a button{
+    a button, button{
         padding: 9px 25px;
         background-color: var(--color_4);
         border: none;
@@ -43,7 +43,7 @@
         transition: all 0.3s ease 0s;
     }
 
-    a button:hover{
+    a button:hover, button:hover{
         background-color: var(--color_5);
     }
 
@@ -62,6 +62,9 @@
         text-align: center;
     }
 
+    .area-button-pdf{
+        text-align: center;
+    }
     #tabelaUsuarios{
         color: var(--color_3);
         text-align: center;
@@ -85,6 +88,11 @@
             <p>Seja bem-vindo: {{ Auth::user()->name }}</p>
             <h3>Gestão de Usuários</h3>
         </div>
+        <div class="area-button-usuario mb-3">
+            <button class="btn-primary" onclick="abrirModalNovoUsuario()">Novo usuário</button>
+        </div>
+        <div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-12 area-datatable">
                 <table class="table" id="tabelaUsuarios">
@@ -95,20 +103,15 @@
                     </thead>
                 </table> 
             </div>
+        </div>
 
-            <div> 
-                <a href="{{URL::to('export')}}" target="_blank" rel="noopener noreferrer">
-                    <button class="btn-primary">Baixar PDF</button>
-                </a>
-            </div>
-
-            <div>
-                <button>Novo usuário</button>
-            </div>
+        <div class="area-button-pdf mt-3">
+            <a href="{{URL::to('export')}}" target="_blank" rel="noopener noreferrer">
+                <button class="btn-primary">Baixar PDF</button>
+            </a>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="modalEditar"  tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -192,6 +195,10 @@
         const user_name = el.parentElement.parentElement.parentElement.querySelector('.table_user_name').textContent;
         const modalTitle = document.querySelector('#tituloModal').textContent = `Edição de usuário - ${user_name}`;
         document.querySelector('.modal-body').setAttribute('data-user_id', user_id);
+        jQuery('#modalEditar').modal('show');
+    }
+
+    const abrirModalNovoUsuario = () =>{
         jQuery('#modalEditar').modal('show');
     }
 
