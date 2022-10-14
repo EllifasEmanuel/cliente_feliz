@@ -64,7 +64,7 @@
                     <input type="password" class="form-control" id="inputSenhaConfirmacao">
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-primary form-edit-user">Salvar</button>
             </form>
         </div>
         <div class="modal-footer">
@@ -101,7 +101,7 @@
                     <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser">
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-primary form-novo-user">Salvar</button>
             </form>
         </div>
         <div class="modal-footer">
@@ -130,7 +130,7 @@
                     <input type="email" class="form-control" id="inputEmailRemoveUser" disabled>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Remover</button>
+                <button type="button" class="btn btn-primary form-remove-user">Remover</button>
             </form>
         </div>
         <div class="modal-footer">
@@ -178,7 +178,7 @@
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </button>
                             <button type="button" class="button-acoes botaoExcluir" button" title="Remover" onclick="abrirModalRemoverUsuarios(this)">
-                                <i class="fa-regular fa-pen-to-square"></i>
+                                <i class="fa fa-trash"></i>
                             </button>
                         </div>
                     `;
@@ -240,101 +240,156 @@
         jQuery('#modalFormRemoverUsuario').modal('show');
     }
 
+    jQuery(document).on("click", ".form-edit-user", function(e) {
+        bootbox.confirm({
+            message: "Deseja editar o usuário?",
+            buttons: {
+                confirm: {
+                    label: 'Sim',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Não',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){ 
+                if(result){
+                    jQuery('#usuarioEditForm').submit()
+                }else{
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+                    jQuery('#modalRetorno').modal('show');
+                }
+            }
+        })
+    })
+
+    jQuery(document).on("click", ".form-novo-user", function(e) {
+        bootbox.confirm({
+            message: "Deseja adicionar o usuário?",
+            buttons: {
+                confirm: {
+                    label: 'Sim',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Não',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){ 
+                if(result){
+                    jQuery('#usuarioNovoForm').submit()
+                }else{
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+                    jQuery('#modalRetorno').modal('show');
+                }
+            }
+        })
+    })
+
+    jQuery(document).on("click", ".form-remove-user", function(e) {
+        bootbox.confirm({
+            message: "Deseja remover o usuário?",
+            buttons: {
+                confirm: {
+                    label: 'Sim',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Não',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function(result){ 
+                if(result){
+                    jQuery('#usuarioRemoverForm').submit()
+                }
+                else{
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+                    jQuery('#modalRetorno').modal('show');
+                }
+            }
+        })
+    })
+
     jQuery("#usuarioEditForm").submit(function(e){
         e.preventDefault();
-        const confirmar = confirm('Deseja atualizar?');
-        if(confirmar){
-            const user_name = document.querySelector('#inputName').value;
-            const user_email = document.querySelector('#inputEmail').value;
-            const user_senha = document.querySelector('#inputSenha').value;
-            const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacao').value;
-            const user_id = document.querySelector('.modal-body').getAttribute('data-user_id');
-            document.querySelector('.conteudo-mensagem').innerHTML = '';
-            jQuery.ajax({
-                url: "{{URL::to('update')}}",
-                type: 'PUT',
-                data: {
-                    _token: CSRF_TOKEN,
-                    user_id: user_id,
-                    user_name: user_name,
-                    user_email: user_email,
-                    user_senha: user_senha,
-                    user_senha_confirmacao: user_senha_confirmacao                        
-                }
-            }).done(function(res){
-                jQuery('#modalFormEditarUsuario').modal('hide');
-                if(!res.error)
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
-                else
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
-                jQuery('#modalRetorno').modal('show');
-            })
-        }else{
-            document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+        const user_name = document.querySelector('#inputName').value;
+        const user_email = document.querySelector('#inputEmail').value;
+        const user_senha = document.querySelector('#inputSenha').value;
+        const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacao').value;
+        const user_id = document.querySelector('.modal-body').getAttribute('data-user_id');
+        document.querySelector('.conteudo-mensagem').innerHTML = '';
+        jQuery.ajax({
+            url: "{{URL::to('update')}}",
+            type: 'PUT',
+            data: {
+                _token: CSRF_TOKEN,
+                user_id: user_id,
+                user_name: user_name,
+                user_email: user_email,
+                user_senha: user_senha,
+                user_senha_confirmacao: user_senha_confirmacao                        
+            }
+        }).done(function(res){
+            jQuery('#modalFormEditarUsuario').modal('hide');
+            if(!res.error)
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
+            else
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
             jQuery('#modalRetorno').modal('show');
-        }
+        })
         reloadDataTable();
     })
 
     jQuery("#usuarioNovoForm").submit(function(e){
         e.preventDefault();
-        const confirmar = confirm('Deseja adicionar novo usuário?');
-        if(confirmar){
-            const user_name = document.querySelector('#inputNameNewUser').value;
-            const user_email = document.querySelector('#inputEmailNewUser').value;
-            const user_senha = document.querySelector('#inputSenhaNewUser').value;
-            const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacaoNewUser').value;
-            document.querySelector('.conteudo-mensagem').innerHTML = ''
-            jQuery.ajax({
-                url: "{{URL::to('create')}}",
-                type: 'POST',
-                data: {
-                    _token: CSRF_TOKEN,
-                    user_name: user_name,
-                    user_email: user_email,
-                    user_senha: user_senha,
-                    user_senha_confirmacao: user_senha_confirmacao                        
-                }
-            }).done(function(res){
-                jQuery('#modalFormNovoUsuario').modal('hide');
-                if(!res.error)
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
-                else
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
-                jQuery('#modalRetorno').modal('show');
-            })
-        }else{
-            document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+        const user_name = document.querySelector('#inputNameNewUser').value;
+        const user_email = document.querySelector('#inputEmailNewUser').value;
+        const user_senha = document.querySelector('#inputSenhaNewUser').value;
+        const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacaoNewUser').value;
+        document.querySelector('.conteudo-mensagem').innerHTML = ''
+        jQuery.ajax({
+            url: "{{URL::to('create')}}",
+            type: 'POST',
+            data: {
+                _token: CSRF_TOKEN,
+                user_name: user_name,
+                user_email: user_email,
+                user_senha: user_senha,
+                user_senha_confirmacao: user_senha_confirmacao                        
+            }
+        }).done(function(res){
+            jQuery('#modalFormNovoUsuario').modal('hide');
+            if(!res.error)
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
+            else
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
             jQuery('#modalRetorno').modal('show');
-        }
+        })
         reloadDataTable();
     })
 
     jQuery("#usuarioRemoverForm").submit(function(e){
         e.preventDefault();
-        const confirmar = confirm('Deseja remover o usuário?');
-        if(confirmar){
-            const user_id = document.querySelector('.modal-body').getAttribute('data-remove_user');
-            document.querySelector('.conteudo-mensagem').innerHTML = '';
-            jQuery.ajax({
-                url: "{{URL::to('remove')}}",
-                type: 'DELETE',
-                data: {
-                    _token: CSRF_TOKEN,
-                    user_id: user_id                   
-                }
-            }).done(function(res){
-                jQuery('#modalFormRemoverUsuario').modal('hide');
-                if(!res.error)
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
-                else
-                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
-                jQuery('#modalRetorno').modal('show');
-            })
-        }else{
-            document.querySelector('.conteudo-mensagem').innerHTML =`<p>Nenhuma ação realizada.</p>`;
+        const user_id = document.querySelector('.modal-body').getAttribute('data-remove_user');
+        document.querySelector('.conteudo-mensagem').innerHTML = '';
+        jQuery.ajax({
+            url: "{{URL::to('remove')}}",
+            type: 'DELETE',
+            data: {
+                _token: CSRF_TOKEN,
+                user_id: user_id                   
+            }
+        }).done(function(res){
+            jQuery('#modalFormRemoverUsuario').modal('hide');
+            if(!res.error)
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
+            else
+                document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
             jQuery('#modalRetorno').modal('show');
-        }
+        })
         reloadDataTable();
     })
 </script>

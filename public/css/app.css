@@ -8,6 +8,10 @@
  */
 
 :root {
+
+  --color_1: #24252A;
+  --color_3: #0a88a9;
+  --color_17: #ff0b0b;
   --blue: #3490dc;
   --indigo: #6574cd;
   --purple: #9561e2;
@@ -10932,3 +10936,24 @@ a.text-dark:focus {
   }
 }
 
+a.navbar-brand.area-sair{
+  transition: 0.5s;
+  color: var(--color_1);
+}
+
+a.navbar-brand.area-sair:hover{
+  transition: 0.5s;
+  color: var(--color_17);
+}
+
+@keyframes go-back {
+  0% {
+      transform: translateX(100px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+.titulo-site{
+  animation: go-back 1s;
+}

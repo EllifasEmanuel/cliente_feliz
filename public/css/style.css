@@ -38,6 +38,25 @@ header{
 .logo{
     cursor: pointer;
 }
+a.navbar-brand.area-sair{
+    transition: 0.5s;
+    color: var(--color_1);
+}
+a.navbar-brand.area-sair:hover{
+    transition: 0.5s;
+    color: var(--color_17);
+}
+@keyframes go-back {
+    0% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.titulo-site{
+    animation: go-back 1s;
+}
 .conteudo-obrigatorio{
   border-color: red !important;
 }
@@ -167,7 +186,6 @@ header{
     float: right !important;
 }
 
-/* CSS */
 .button-acao {
   appearance: none;
   background-color: transparent;

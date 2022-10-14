@@ -25,13 +25,14 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 </head>
 <body>
     @yield('css')
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <a class="navbar-brand titulo-site" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -55,9 +56,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                               <a class="navbar-brand" href="{{route('logout')}}">Sair</a>
-                            </li>
+                            <a class="navbar-brand area-sair" href="{{route('logout')}}" title="Sair">Sair <i class="fa fa-sign-out"></i></a>
                         @endguest
                     </ul>
                 </div>
