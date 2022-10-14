@@ -49,19 +49,19 @@
                 @csrf
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Matheus">
+                    <input type="text" class="form-control" id="inputName" placeholder="Matheus" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputSenha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="inputSenha">
+                    <input type="password" class="form-control" id="inputSenha" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputSenhaConfirmacao" class="form-label">Confirmação de Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaConfirmacao">
+                    <input type="password" class="form-control" id="inputSenhaConfirmacao" required>
                 </div>
                 
                 <button type="button" class="btn btn-primary form-edit-user">Salvar</button>
@@ -86,19 +86,19 @@
                 @csrf
                 <div class="mb-3">
                     <label for="inputNameNewUser" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="inputNameNewUser" placeholder="Matheus">
+                    <input type="text" class="form-control" id="inputNameNewUser" placeholder="Matheus" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputEmailNewUser" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmailNewUser" placeholder="name@example.com">
+                    <input type="email" class="form-control" id="inputEmailNewUser" placeholder="name@example.com" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputSenhaNewUser" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaNewUser">
+                    <input type="password" class="form-control" id="inputSenhaNewUser" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputSenhaConfirmacaoNewUser" class="form-label">Confirmação de Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser">
+                    <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser" required>
                 </div>
                 
                 <button type="button" class="btn btn-primary form-novo-user">Salvar</button>
@@ -327,10 +327,9 @@
             data: {
                 _token: CSRF_TOKEN,
                 user_id: user_id,
-                user_name: user_name,
-                user_email: user_email,
-                user_senha: user_senha,
-                user_senha_confirmacao: user_senha_confirmacao                        
+                name: user_name,
+                email: user_email,
+                password: user_senha                   
             }
         }).done(function(res){
             jQuery('#modalFormEditarUsuario').modal('hide');
@@ -355,10 +354,9 @@
             type: 'POST',
             data: {
                 _token: CSRF_TOKEN,
-                user_name: user_name,
-                user_email: user_email,
-                user_senha: user_senha,
-                user_senha_confirmacao: user_senha_confirmacao                        
+                name: user_name,
+                email: user_email,
+                senha: user_senha                     
             }
         }).done(function(res){
             jQuery('#modalFormNovoUsuario').modal('hide');
