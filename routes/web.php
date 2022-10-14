@@ -27,9 +27,10 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/usuarios',[UsuariosController::class, 'index'])->middleware('verified');
+Route::post('/create',[UsuariosController::class, 'create'])->middleware('verified');
 Route::get('/show',[UsuariosController::class, 'show'])->middleware('verified');
-Route::get('/update',[UsuariosController::class, 'update'])->middleware('verified');
-Route::get('/remove',[UsuariosController::class, 'remove'])->middleware('verified');
+Route::put('/update',[UsuariosController::class, 'update'])->middleware('verified');
+Route::delete('/remove',[UsuariosController::class, 'remove'])->middleware('verified');
 
 Route::get('/export',[ExportPDFController::class, 'generatePDF'])->middleware('verified');
 

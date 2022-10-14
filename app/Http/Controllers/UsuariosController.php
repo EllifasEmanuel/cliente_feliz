@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
+    protected UserService $service;
+
+    public function __construct(){
+        $this->service = app(UserService::class);
+    }
+
     public function index(){
         return view('layouts.usuarios');
     }
 
     public function show(){
-        
-        $usuarios = User::select('id','name');
+        $usuarios = User::select('id','name','email');
 
         return datatables($usuarios)->make(true);
     }
 
-    public function update(Request $request){
-        $usuarios = User::find($request['user_id']);
-        // User::select('id','name');
+    public function create(Request $request){
+        return $this->service->criarUsuario($request);
+    }
 
-        return response()->json($request);
+    public function update(Request $request){
+        return $this->service->atualizarUsuario($request);
     }
 
     public function remove(Request $request){
-        $usuarios = User::find($request['user_id']);
-        // User::select('id','name');
-
-        return response()->json($request);
+        return $this->service->deletarUsuario($request);
     }
 }

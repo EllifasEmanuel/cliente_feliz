@@ -11,8 +11,11 @@ class ExportPDFController extends Controller
 {
     public function generatePDF()
     {
-        $pdf = PDF::loadView('pdf.usuarios');
+        $usuarios = User::all();
+        $pdf = PDF::loadView('pdf.usuarios',[
+            'users' => $usuarios
+        ]);
         
-        return $pdf->download('users.pdf');
+        return $pdf->download('usuarios.pdf');
     }
 }
