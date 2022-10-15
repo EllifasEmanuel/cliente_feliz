@@ -344,26 +344,31 @@
         const user_email = document.querySelector('#inputEmail').value;
         const user_senha = document.querySelector('#inputSenha').value;
         const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacao').value;
-        const user_id = document.querySelector('.modal-body').getAttribute('data-user_id');
+        const user_id = document.querySelector('.modal-body').getAttribute('data-user_id');        
         document.querySelector('.conteudo-mensagem').innerHTML = '';
-        jQuery.ajax({
-            url: "{{URL::to('update')}}",
-            type: 'PUT',
-            data: {
-                _token: CSRF_TOKEN,
-                user_id: user_id,
-                name: user_name,
-                email: user_email,
-                password: user_senha                   
-            }
-        }).done(function(res){
-            jQuery('#modalFormEditarUsuario').modal('hide');
-            if(!res.error)
-                document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
-            else
-                document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
+        if(user_senha == user_senha_confirmacao){
+            jQuery.ajax({
+                url: "{{URL::to('update')}}",
+                type: 'PUT',
+                data: {
+                    _token: CSRF_TOKEN,
+                    user_id: user_id,
+                    name: user_name,
+                    email: user_email,
+                    password: user_senha                   
+                }
+            }).done(function(res){
+                jQuery('#modalFormEditarUsuario').modal('hide');
+                if(!res.error)
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
+                else
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
+                jQuery('#modalRetorno').modal('show');
+            })
+        }else{
+            document.querySelector('.conteudo-mensagem').innerHTML =`<p>As senhas não se correspondem.</p>`;            
             jQuery('#modalRetorno').modal('show');
-        })
+        }
         reloadDataTable();
     })
 
@@ -374,23 +379,29 @@
         const user_senha = document.querySelector('#inputSenhaNewUser').value;
         const user_senha_confirmacao = document.querySelector('#inputSenhaConfirmacaoNewUser').value;
         document.querySelector('.conteudo-mensagem').innerHTML = ''
-        jQuery.ajax({
-            url: "{{URL::to('create')}}",
-            type: 'POST',
-            data: {
-                _token: CSRF_TOKEN,
-                name: user_name,
-                email: user_email,
-                senha: user_senha                     
-            }
-        }).done(function(res){
-            jQuery('#modalFormNovoUsuario').modal('hide');
-            if(!res.error)
-                document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
-            else
-                document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
+        if(user_senha == user_senha_confirmacao){
+            jQuery.ajax({
+                url: "{{URL::to('create')}}",
+                type: 'POST',
+                data: {
+                    _token: CSRF_TOKEN,
+                    name: user_name,
+                    email: user_email,
+                    senha: user_senha                     
+                }
+            }).done(function(res){
+                jQuery('#modalFormNovoUsuario').modal('hide');
+                if(!res.error)
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>${res.message}</p>`;
+                else
+                    document.querySelector('.conteudo-mensagem').innerHTML =`<p>Não foi possível realizar a ação</p>`;
+                jQuery('#modalRetorno').modal('show');
+            })
+        }
+        else{
+            document.querySelector('.conteudo-mensagem').innerHTML =`<p>As senhas não se correspondem.</p>`;
             jQuery('#modalRetorno').modal('show');
-        })
+        }
         reloadDataTable();
     })
 

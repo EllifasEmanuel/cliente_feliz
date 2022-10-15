@@ -15,7 +15,7 @@ class UserService{
     }
 
     public function criarUsuario($data){
-        if($this->verificarUsuario($data['user_email'])){
+        if($this->verificarUsuario($data['email'])){
             return response()->json([
                 'error' => true,
                 'message' => 'Usuário existente.'
@@ -25,10 +25,10 @@ class UserService{
     }
 
     public function atualizarUsuario($data){
-        if(!$this->verificarUsuario($data['user_email'])){
+        if(!$this->verificarUsuario($data['email'])){
             return response()->json([
                 'error' => true,
-                'message' => 'Usuário não existe.'
+                'message' => 'Usuário não encontrado.'
             ]);
         }
         return $this->repository->atualizarUsuario($data);

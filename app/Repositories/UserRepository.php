@@ -12,9 +12,9 @@ class UserRepository
         DB::beginTransaction();
         try{
             User::create([
-                'name' => $data['user_name'],
-                'email' => $data['user_email'],
-                'password' => Hash::make($data['user_senha'])
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['senha'])
             ]);
             DB::commit();
             return response()->json([
@@ -34,9 +34,9 @@ class UserRepository
         DB::beginTransaction();
         try{
             $user = User::find($data['user_id']);            
-            $user->name = $data['user_name'];
-            $user->email = $data['user_email'];
-            $user->password = Hash::make($data['user_senha']);
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = Hash::make($data['senha']);
             $user = $user->save();
             DB::commit();
             return response()->json([
