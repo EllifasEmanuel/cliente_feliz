@@ -55,15 +55,16 @@
                     <label for="inputEmail" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" required>
                 </div>
-                <div class="mb-3">
-                    <label for="inputSenha" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="inputSenha" required>
+                <label for="inputSenha" class="form-label">Senha</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="inputSenha">
+                    <button class="btn btn-outline-secondary" id="visualizarSenhaEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
-                <div class="mb-3">
-                    <label for="inputSenhaConfirmacao" class="form-label">Confirmação de Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaConfirmacao" required>
+                <label for="inputSenhaConfirmacao" class="form-label">Senha</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="inputSenhaConfirmacao">
+                    <button class="btn btn-outline-secondary" id="visualizarSenhaConfirmacaoEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
-                
                 <button type="button" class="btn btn-primary form-edit-user">Salvar</button>
             </form>
         </div>
@@ -92,13 +93,15 @@
                     <label for="inputEmailNewUser" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmailNewUser" placeholder="name@example.com" required>
                 </div>
-                <div class="mb-3">
-                    <label for="inputSenhaNewUser" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaNewUser" required>
+                <label for="inputSenhaNewUser" class="form-label">Senha</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="inputSenhaNewUser" placeholder="">
+                    <button class="btn btn-outline-secondary" id="visualizarSenhaNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
-                <div class="mb-3">
-                    <label for="inputSenhaConfirmacaoNewUser" class="form-label">Confirmação de Senha</label>
-                    <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser" required>
+                <label for="inputSenhaConfirmacaoNewUser" class="form-label">Confirmação de Senha</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser" placeholder="">
+                    <button class="btn btn-outline-secondary" id="visualizarSenhaConfirmacaoNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
                 
                 <button type="button" class="btn btn-primary form-novo-user">Salvar</button>
@@ -217,15 +220,21 @@
         document.querySelector('.modal-body').setAttribute('data-user_id', user_id);
         document.querySelector('#inputName').value = user_name;
         document.querySelector('#inputEmail').value = user_email;
+        document.querySelector('#inputSenha').value = ''
+        document.querySelector('#inputSenhaConfirmacao').value = ''
+        document.querySelector('#inputSenha').type = 'password'
+        document.querySelector('#inputSenhaConfirmacao').type = 'password'
         jQuery('#modalFormEditarUsuario').modal('show');
     }
 
     const abrirModalNovoUsuario = () =>{
         const modalTitle = document.querySelector('#tituloModalNovo').textContent = `Novo Usuário`;
-        document.querySelector('#inputName').value = '';
-        document.querySelector('#inputEmail').value = '';
-        document.querySelector('#inputSenha').value = '';
-        document.querySelector('#inputSenhaConfirmacao').value = '';
+        document.querySelector('#inputNameNewUser').value = '';
+        document.querySelector('#inputEmailNewUser').value = '';
+        document.querySelector('#inputSenhaNewUser').value = '';
+        document.querySelector('#inputSenhaConfirmacaoNewUser').value = '';
+        document.querySelector('#inputSenhaNewUser').type = 'password'
+        document.querySelector('#inputSenhaConfirmacaoNewUser').type = 'password'
         jQuery('#modalFormNovoUsuario').modal('show');
     }
 
@@ -238,6 +247,22 @@
         document.querySelector('#inputNameRemoveUser').value = user_name;
         document.querySelector('#inputEmailRemoveUser').value = user_email;
         jQuery('#modalFormRemoverUsuario').modal('show');
+    }
+
+    const visualizarSenha = (el) =>{
+        if(el.id == 'visualizarSenhaNovo')
+            inputEl = document.querySelector('#inputSenhaNewUser');
+        if(el.id == 'visualizarSenhaConfirmacaoNovo')
+            inputEl = document.querySelector('#inputSenhaConfirmacaoNewUser')
+        if(el.id == 'visualizarSenhaConfirmacaoEdit')
+            inputEl = document.querySelector('#inputSenhaConfirmacao');
+        if(el.id == 'visualizarSenhaEdit')
+            inputEl = document.querySelector('#inputSenha');
+
+        if(inputEl.type == 'text')
+            inputEl.type = 'password'
+        else
+            inputEl.type = 'text'
     }
 
     jQuery(document).on("click", ".form-edit-user", function(e) {
