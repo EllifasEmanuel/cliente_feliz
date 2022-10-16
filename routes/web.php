@@ -24,14 +24,15 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::middleware(['verified'])->group(function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/usuarios',[UsuariosController::class, 'index'])->name('usuarios');
+    Route::post('/create',[UsuariosController::class, 'create']);
+    Route::get('/show',[UsuariosController::class, 'show']);
+    Route::put('/update',[UsuariosController::class, 'update']);
+    Route::delete('/remove',[UsuariosController::class, 'remove']);
 
-Route::get('/usuarios',[UsuariosController::class, 'index'])->name('usuarios')->middleware('verified');
-Route::post('/create',[UsuariosController::class, 'create'])->middleware('verified');
-Route::get('/show',[UsuariosController::class, 'show'])->middleware('verified');
-Route::put('/update',[UsuariosController::class, 'update'])->middleware('verified');
-Route::delete('/remove',[UsuariosController::class, 'remove'])->middleware('verified');
+    Route::get('/export',[ExportPDFController::class, 'generatePDF']);
 
-Route::get('/export',[ExportPDFController::class, 'generatePDF'])->middleware('verified');
-
-Route::get('/logout',[LoginController::class, 'destroy'])->name('logout');
+    Route::get('/logout',[LoginController::class, 'destroy']);
+});
