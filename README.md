@@ -1,3 +1,28 @@
+## Bibliotecas
+composer require yajra/laravel-datatables:^9.0
+composer require barryvdh/laravel-dompdf
+
+'providers' => [
+    // ...
+    Barryvdh\DomPDF\ServiceProvider::class,
+    Yajra\DataTables\DataTablesServiceProvider::class,
+],
+'aliases' => [
+    ...,
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+    'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+]
+
+## Autenticação
+composer require laravel/ui "^1.0" --dev
+ 
+php artisan ui vue --auth
+## Sedeer
+php artisan db:seed --class=UserSeeder
+
+## .env
+APP_NAME=ClienteFeliz
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

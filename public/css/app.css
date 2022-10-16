@@ -2119,6 +2119,7 @@ pre code {
 }
 
 .form-control {
+  border-radius: 10px !important;
   display: block;
   width: 100%;
   height: calc(1.6em + 0.75rem + 2px);
@@ -2678,6 +2679,7 @@ textarea.form-control.is-invalid {
 
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
+  width: 100%;
 }
 
 a.btn.disabled,
@@ -3305,6 +3307,7 @@ fieldset:disabled a.btn {
   font-weight: 400;
   color: #3490dc;
   text-decoration: none;
+  text-align: start;
 }
 
 .btn-link:hover {
@@ -5003,6 +5006,7 @@ input[type=button].btn-block {
 }
 
 .card {
+  border-radius: 10px !important;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -5012,6 +5016,7 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  top: 100%;
 }
 
 .card > hr {
@@ -5044,7 +5049,7 @@ input[type=button].btn-block {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 2rem 1.25rem !important;
 }
 
 .card-title {
@@ -5076,7 +5081,9 @@ input[type=button].btn-block {
 }
 
 .card-header:first-child {
-  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+  border-radius: 10px !important;
+  background-color: #0a88a9;
+  color: #FFF;
 }
 
 .card-footer {
@@ -10956,4 +10963,16 @@ a.navbar-brand.area-sair:hover{
 }
 .titulo-site{
   animation: go-back 1s;
+}
+
+button.btn.btn-primary{
+  background-color: #0a88a9;
+}
+
+body.vsc-initialized{
+  background: linear-gradient(269deg,#e5dde5,#0a88a9) !important;
+}
+
+a.btn.btn-link{
+  text-align: start;
 }
