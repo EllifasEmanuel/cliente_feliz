@@ -58,12 +58,12 @@
                 <label for="inputSenha" class="form-label">Senha</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="inputSenha">
-                    <button class="btn btn-outline-secondary" id="visualizarSenhaEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
+                    <button class="btn" id="visualizarSenhaEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
                 <label for="inputSenhaConfirmacao" class="form-label">Senha</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="inputSenhaConfirmacao">
-                    <button class="btn btn-outline-secondary" id="visualizarSenhaConfirmacaoEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
+                    <button class="btn" id="visualizarSenhaConfirmacaoEdit" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
                 <button type="button" class="btn btn-primary form-edit-user">Salvar</button>
             </form>
@@ -96,12 +96,12 @@
                 <label for="inputSenhaNewUser" class="form-label">Senha</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="inputSenhaNewUser" placeholder="">
-                    <button class="btn btn-outline-secondary" id="visualizarSenhaNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
+                    <button class="btn" id="visualizarSenhaNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
                 <label for="inputSenhaConfirmacaoNewUser" class="form-label">Confirmação de Senha</label>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="inputSenhaConfirmacaoNewUser" placeholder="">
-                    <button class="btn btn-outline-secondary" id="visualizarSenhaConfirmacaoNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
+                    <button class="btn" id="visualizarSenhaConfirmacaoNovo" type="button" onclick="visualizarSenha(this)" title="Visualizar senha"><i class="fa fa-eye"></i></button>
                 </div>
                 
                 <button type="button" class="btn btn-primary form-novo-user">Salvar</button>

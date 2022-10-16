@@ -76,7 +76,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #f9f9f9 !important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2679,7 +2679,7 @@ textarea.form-control.is-invalid {
 
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
-  width: 100%;
+  border-radius: 10px;
 }
 
 a.btn.disabled,
@@ -5016,7 +5016,7 @@ input[type=button].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  top: 100%;
+  top: 50%;
 }
 
 .card > hr {
@@ -10967,10 +10967,6 @@ a.navbar-brand.area-sair:hover{
 
 button.btn.btn-primary{
   background-color: #0a88a9;
-}
-
-body.vsc-initialized{
-  background: linear-gradient(269deg,#e5dde5,#0a88a9) !important;
 }
 
 a.btn.btn-link{

@@ -28,7 +28,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 </head>
 <body>
-    @yield('css')
     <div id="app">
         <nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
             <div class="container">
