@@ -26,7 +26,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-Route::get('/usuarios',[UsuariosController::class, 'index'])->middleware('verified');
+Route::get('/usuarios',[UsuariosController::class, 'index'])->name('usuarios')->middleware('verified');
 Route::post('/create',[UsuariosController::class, 'create'])->middleware('verified');
 Route::get('/show',[UsuariosController::class, 'show'])->middleware('verified');
 Route::put('/update',[UsuariosController::class, 'update'])->middleware('verified');

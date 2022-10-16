@@ -188,7 +188,6 @@
                 }}
             ],
             oLanguage: {
-                sProcessing:   '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
                 sLengthMenu:   "Mostrar _MENU_ registros",
                 sZeroRecords:  "Não foram encontrados resultados",
                 sInfo:         "Mostrando de _START_ até _END_ de _TOTAL_ registros",
